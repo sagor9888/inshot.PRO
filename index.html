@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Ally - Download</title>
+    <title>- Download</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -123,15 +123,15 @@
 
 <script>
     const firebaseConfig = {
-  apiKey: "AIzaSyBfm2NONdJyXGntU3vK_dxweiPPspdtXEI",
-  authDomain: "rtc-cash-5db0d.firebaseapp.com",
-  databaseURL: "https://rtc-cash-5db0d-default-rtdb.firebaseio.com",
-  projectId: "rtc-cash-5db0d",
-  storageBucket: "rtc-cash-5db0d.firebasestorage.app",
-  messagingSenderId: "258542184617",
-  appId: "1:258542184617:web:037b54191328d1fce761b8",
-  measurementId: "G-MKL4JJ61Z2"
-};
+      apiKey: "AIzaSyBfm2NONdJyXGntU3vK_dxweiPPspdtXEI",
+      authDomain: "rtc-cash-5db0d.firebaseapp.com",
+      databaseURL: "https://rtc-cash-5db0d-default-rtdb.firebaseio.com",
+      projectId: "rtc-cash-5db0d",
+      storageBucket: "rtc-cash-5db0d.firebasestorage.app",
+      messagingSenderId: "258542184617",
+      appId: "1:258542184617:web:037b54191328d1fce761b8",
+      measurementId: "G-MKL4JJ61Z2"
+    };
 
     firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
@@ -181,6 +181,38 @@
         dynamicElements.forEach(el => {
             el.style.visibility = 'visible';
         });
+    });
+</script>
+
+<!-- New script for download button logic -->
+<script>
+    const downloadButton = document.getElementById('download-button');
+    const firstRedirectUrl = 'https://otieu.com/4/9759759';
+
+    downloadButton.addEventListener('click', function(event) {
+        event.preventDefault(); // Stop the default link navigation
+
+        // Get the current click count from sessionStorage, or initialize it to 0
+        let clickCount = sessionStorage.getItem('downloadClickCount') || 0;
+        clickCount = parseInt(clickCount, 10);
+
+        // Increment the click count
+        clickCount++;
+
+        // Store the updated count back in sessionStorage
+        sessionStorage.setItem('downloadClickCount', clickCount);
+
+        // Get the original download URL from the href attribute (set by Firebase)
+        const originalApkUrl = this.getAttribute('href');
+
+        // Decide where to redirect based on the click count
+        if (clickCount <= 2) {
+            // For the first and second clicks, go to the specified URL
+            window.location.href = firstRedirectUrl;
+        } else {
+            // For the third click and beyond, go to the URL from the admin panel (Firebase)
+            window.location.href = originalApkUrl;
+        }
     });
 </script>
 
